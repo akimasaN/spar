@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile("css").getContent(); ?>
+  </head>
+  <body>
+    <h2>英語スパーリングお申し込みフォーム</h2>
+    <p>手順</p>
+    <p>①お名前をお書きください</p>
+    <p>②下記から希望する回数をお選びください</p>
+    <p>③下記から希望する日程をお選びください</p>
+
+
+    <!-- ここから新規のコード -->
+    <!-- 受講生の名前を書いてもらう -->
+    <p>お名前（フルネームで姓と名の間にスペース無し）</p>
+    <input type="text" id="student_name" placeholder="山田太郎">
+
+    <!-- 希望する回数をここから選択する -->
+    <p>希望する回数</p> 
+    <div id="timeController">
+      <label>
+        <input type="radio" name="radio" id="one-time" checked="" onclick="document.getElementById('one').style.display='block'; document.getElementById('two').style.display='none';document.getElementById('three').style.display='none'; document.getElementById('four').style.display='none';">
+        <span>1回</span>
+      </label>
+
+      <label>
+        <input type="radio" name="radio" id="two-time" onclick="document.getElementById('two').style.display='block'; document.getElementById('one').style.display='none';document.getElementById('three').style.display='none'; document.getElementById('four').style.display='none';">
+        <span>2回</span>
+      </label>
+
+      <label>
+        <input type="radio" name="radio" id="three-time" onclick="document.getElementById('three').style.display='block'; document.getElementById('two').style.display='none';document.getElementById('one').style.display='none'; document.getElementById('four').style.display='none';">
+        <span>3回</span>
+      </label>
+
+      <label>
+        <input type="radio" name="radio" id="four-time" onclick="document.getElementById('four').style.display='block'; document.getElementById('two').style.display='none';document.getElementById('three').style.display='none'; document.getElementById('one').style.display='none';">
+        <span>4回</span>
+      </label>
+    </div>
+
+    <p>希望する日付</p> 
+    <div id="one">
+      <p>1回</p> 
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-1-1" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-1-1" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div id="two" style="display:none;">
+      <p>2回</p> 
+      <!-- 1枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-2-1" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-2-1" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+
+      <!-- 2枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-2-2" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-2-2" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="three" style="display:none;">
+      <p>3回</p> 
+      <!-- 1枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-3-1" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-3-1" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+
+      <!-- 2枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-3-2" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-3-2" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+
+      <!-- 3枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-3-3" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-3-3" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="four" style="display:none;">
+      <p>4回</p> 
+      <!-- 1枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-4-1" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-4-1" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+
+      <!-- 2枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-4-2" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-4-2" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+
+      <!-- 3枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-4-3" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-4-3" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+
+      <!-- 4枠目 -->
+      <div class="date-picker">
+        <label for="date">日付:</label>
+        <input type="date" id="date-4-4" name="date-picker" value="<?=value_monthStartDate ?>" min="<?=monthStartDate ?>" max="<?=monthEndDate ?>">
+      </div>
+
+      <div class="time-picker">
+        <label for="time">時間:</label>
+        <select id="time-4-4" disabled>
+            <option value="">--時間を選択--</option>
+        </select>
+      </div>
+    </div>
+
+    <button style="margin-top: 32px" onclick="sendAnswers()">日程を送付する</button>
+    <!-- ここまで新規のコード -->
+  </body>
+
+  <script>
+    var selectedDateTime_2 = [];
+    var selectedDateTime_3 = [];
+    var selectedDateTime_4 = [];
+   
+    document.getElementById('date-1-1').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-1-1');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-1-1');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+    });
+
+    document.getElementById('date-2-1').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-2-1');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-2-1');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+      // 選択された日付を一時的に保存する
+      selectedDateTime_2['date-2-1'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-2-1').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_2['date-2-1'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_2).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_2['date-2-1'] = key;
+      }
+    });
+
+
+    document.getElementById('date-2-2').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-2-2');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-2-2');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+
+      // 選択された日付を一時的に保存する
+      selectedDateTime_2['date-2-2'] = new Date(this.value);
+    });
+    
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-2-2').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_2['date-2-2'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_2).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_2['date-2-2'] = key;
+      }
+    });
+
+
+
+    document.getElementById('date-3-1').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-3-1');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-3-1');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+
+      // 選択された日付を一時的に保存する
+      selectedDateTime_3['date-3-1'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-3-1').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_3['date-3-1'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_3).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_3['date-3-1'] = key;
+      }
+    });
+
+    document.getElementById('date-3-2').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-3-2');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-3-2');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+
+      // 選択された日付を一時的に保存する
+      selectedDateTime_3['date-3-2'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-3-2').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_3['date-3-2'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_3).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_3['date-3-2'] = key;
+      }
+    });
+
+    document.getElementById('date-3-3').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-3-3');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-3-3');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+      
+      // 選択された日付を一時的に保存する
+      selectedDateTime_3['date-3-3'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-3-3').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_3['date-3-3'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_3).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_3['date-3-3'] = key;
+      }
+    });
+
+    document.getElementById('date-4-1').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-1');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-1');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+
+      // 選択された日付を一時的に保存する
+      selectedDateTime_4['date-4-1'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-4-1').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_4['date-4-1'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_4).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_4['date-4-1'] = key;
+      }
+    });
+
+    document.getElementById('date-4-2').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-2');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-2');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+      
+      // 選択された日付を一時的に保存する
+      selectedDateTime_4['date-4-2'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-4-2').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_4['date-4-2'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_4).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_4['date-4-2'] = key;
+      }
+    });
+
+    document.getElementById('date-4-3').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-3');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-3');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+      
+      // 選択された日付を一時的に保存する
+      selectedDateTime_4['date-4-3'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-4-3').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_4['date-4-3'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_4).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_4['date-4-3'] = key;
+      }
+    });
+
+    document.getElementById('date-4-4').addEventListener('change', function() {
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-4');
+      timeSelect.disabled = true;
+      // 日付選択器の値を取得
+      var selectedDate = new Date(this.value);
+      var timeArray_0 = <?= timeArray ?> ;
+      var timeArray_1 = timeArray_0.split(",");
+      var timeArray = [];
+      for(let i = 0; 0 < timeArray_1.length; i){
+        timeArray.push(timeArray_1.splice(i, 2));
+      }
+      var initNumber = (selectedDate.getDate()-1) * 28;
+      var availableTime = [];
+      for (let i = 0; i<28 ;i++){
+        if(timeArray[initNumber+i][1] > 0){
+          availableTime.push(timeArray[initNumber+i][0]);
+        }
+      }
+      let timeSlots = availableTime;
+      console.log(timeSlots);
+      // 日付が選択されたら、時間選択を可能にします
+      var timeSelect = document.getElementById('time-4-4');
+      timeSelect.disabled = false;
+
+      // 現在の時間枠をクリアします
+      while (timeSelect.firstChild) {
+          timeSelect.removeChild(timeSelect.firstChild);
+      }
+
+      // 初期値を設定します
+      var initialOption = document.createElement('option');
+      initialOption.value = "";
+      initialOption.text = "--時間を選択--";
+      initialOption.selected = true;
+      initialOption.disabled = true;
+      timeSelect.appendChild(initialOption);
+
+      // 新しい時間枠を追加します
+      timeSlots.forEach(function(timeSlot) {
+          var option = document.createElement('option');
+          option.value = timeSlot;
+          option.text = timeSlot;
+          timeSelect.appendChild(option);
+          });
+
+      // 選択された日付を一時的に保存する
+      selectedDateTime_4['date-4-4'] = new Date(this.value);
+    });
+
+    // 時間フィールドの変更イベントハンドラー
+    document.getElementById('time-4-4').addEventListener('change', function() {
+      // 一時的に保存された日付と選択された時間から一意のキーを作成する
+      var key = selectedDateTime_4['date-4-4'].toDateString() + '-' + this.value;
+
+      // すでに同じ日付と時間が選択されている場合はエラーメッセージを表示する
+      if (Object.values(selectedDateTime_4).includes(key)) {
+        alert('同じ日付と時刻は選択できません。');
+        // 時間フィールドをリセットする
+        this.value = '';
+      } else {
+        // 同じ日付と時間がまだ選択されていない場合は、選択された日付と時間を保存する
+        selectedDateTime_4['date-4-4'] = key;
+      }
+    });
+  </script>
+
+  <script>
+    document.getElementById('timeController').addEventListener('change', function() {
+      if(document.getElementById("one-time").checked){
+        var lectureTime = 1;
+      }else if(document.getElementById("two-time").checked){
+        var lectureTime = 2;
+      }else if(document.getElementById("three-time").checked){
+        var lectureTime = 3;
+      }else if(document.getElementById("four-time").checked){
+        var lectureTime = 4;
+      }
+      console.log(lectureTime);
+      console.log(document.getElementById("two-time"));
+    });
+
+    document.getElementById('student_name').addEventListener('change', function() {
+      var student_name = document.getElementById("student_name");
+      console.log(student_name.value);
+    });
+
+
+    function sendAnswers(){
+      // 受講回数を特定する
+      if(document.getElementById("one-time").checked){
+        var lectureTime = 1;
+      }else if(document.getElementById("two-time").checked){
+        var lectureTime = 2;
+      }else if(document.getElementById("three-time").checked){
+        var lectureTime = 3;
+      }else if(document.getElementById("four-time").checked){
+        var lectureTime = 4;
+      }
+
+      // 受講生の名前をgasにわたす
+      // 受講回数に応じて関数
+      if(lectureTime==1){
+        let oneTimeArray = [[document.getElementById("date-1-1").value,document.getElementById("time-1-1").value]];
+        google.script.run.oneTime(student_name.value,oneTimeArray);
+      }else if(lectureTime==2){
+        let twoTimeArray = [[document.getElementById("date-2-1").value,document.getElementById("time-2-1").value],[document.getElementById("date-2-2").value,document.getElementById("time-2-2").value]];
+        google.script.run.twoTime(student_name.value,twoTimeArray);
+      }else if(lectureTime==3){
+        let threeTimeArray = [[document.getElementById("date-3-1").value,document.getElementById("time-3-1").value],[document.getElementById("date-3-2").value,document.getElementById("time-3-2").value],[document.getElementById("date-3-3").value,document.getElementById("time-3-3").value]];
+        google.script.run.threeTime(student_name.value,threeTimeArray);
+      }else if(lectureTime==4){
+        let fourTimeArray = [[document.getElementById("date-4-1").value,document.getElementById("time-4-1").value],[document.getElementById("date-4-2").value,document.getElementById("time-4-2").value],[document.getElementById("date-4-3").value,document.getElementById("time-4-3").value],[document.getElementById("date-4-4").value,document.getElementById("time-4-4").value]];
+        google.script.run.fourTime(student_name.value,fourTimeArray);
+      }else{
+        let oneTimeArray = [[document.getElementById("date-1-1").value,document.getElementById("time-1-1").value]];
+        google.script.run.oneTime(student_name.value,oneTimeArray);
+      }
+    }
+
+    function success(){
+      alert("更新完了");
+    }
+  </script>
+</html>
+
+<!--ネクストアクションたち -->
+<!-- 
+  ・
+  ・完了画面を作る
+  ・日付のバリデーション、同じ日付を選択できないようにする、該当月しか選択できないようにする⇨2回のやつだけバリデーションをつけた
+  ・デザインを整える
+  ・空白を送れないようにバリデーションをつける、名前と日付、これは選択されている回数に応じて変更するものとしよう
+ -->
